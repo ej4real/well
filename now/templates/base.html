@@ -20,7 +20,7 @@
     <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
 
       {% if user.is_authenticated %}
-            <li><a href="#">Dashboard</a></li>
+            <li><a href="{% url 'profileacc:dash' %}" class="nav-link">Dashboard</a></li>
             <li><a href="#">Patients</a></li>
             <li><a href="#">About</a></li>
             <li><h4>Welcome, {{ user.get_username }}!</h4></li>

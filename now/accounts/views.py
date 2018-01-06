@@ -12,20 +12,6 @@ class RegisterView(CreateView):
     success_url = '/login'
     template_name = "accounts/signup.html"
 
-    def some_view(request):
-        if request.method == 'POST':
-            form1 = RegisterForm(request.POST, prefix='form1')
-            form2 = ProfileRegForm(request.POST, prefix='form2')
-            if all([form1.is_valid(), form2.is_valid()]):
-                pass # Do stuff with the forms
-        else:
-            form1 = GeneralForm(prefix='form1')
-            form2 = GeneralForm(prefix='form2')
-        return render_to_response('/accounts/signup.html', {
-            'form1': form1,
-            'form2': form2,
-        })
-
 
 class LoginView(NextUrlMixin, RequestFormAttachMixin, FormView):
     form_class = forms.LoginForm

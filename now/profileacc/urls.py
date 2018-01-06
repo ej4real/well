@@ -1,10 +1,11 @@
 from django.conf.urls import url
 #from django.contrib.auth import views as auth_views
-from . import views
+from profileacc.views import DashboardView
 
 app_name = 'profileacc'
 
 urlpatterns = [
-    
+
+        url(r"dashboard/$", DashboardView.as_view(),name='dash'),
 
 ]
