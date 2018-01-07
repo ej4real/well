@@ -5,18 +5,18 @@ from accounts.models import User
 
 
 class DocProfileManager(models.Manager):
-    def  create_user(self, address1, birth_date):
+    def  create_user(self, profile, address1, birth_date):
         if not address1:
             raise ValueError("Users must have an address")
-        prof_obj = self.model(
+        user = self.model(
             address1 = address1,
             birthdate = birthdate,
         )
-        prof_obj.save(using=self.db)
-        return prof_obj
+        user.save(using=self.db)
+        return user, profile
 
 class DocProfile(models.Model):
-    profile = models.OneToOneField(User)
+    profile = models.OneToOneField(User, null=True, blank=True)
     address1 = models.CharField(max_length=255, null=True)
     birth_date = models.DateField(null=True, blank=True)
 

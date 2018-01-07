@@ -36,7 +36,7 @@ class ProfileRegForm(forms.ModelForm):
 
     def save(self, commit=True):
         # Save the provided password in hashed format
-        user = super(ProfileRegForm, self).save(commit=False)
+        user_obj = super(ProfileRegForm, self).save(commit=False)
         if commit:
-            user.save()
-        return user
+            user_obj.save()
+        return user_obj

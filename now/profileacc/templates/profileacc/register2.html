@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% load bootstrap4 %}
-
 {% block content %}
 <div class="row">
   <div class="col-md-8">
@@ -9,8 +8,9 @@
     <form method="POST">
         {% csrf_token %}
         {% bootstrap_form form %}
-        <input type="submit" value="Next" class="btn btn-default">
+        <input type="submit" value="Register!" class="btn btn-default">
         <button type="reset" value="Reset">Reset</button>
     </form>
 </div>
+
 {% endblock %}

@@ -33,7 +33,7 @@ class AccountHomeView(LoginRequiredMixin, DetailView):
 
 class RegisterView(CreateView):
     form_class  = forms.RegisterForm
-    success_url = '/login'
+    success_url = '/profileacc/register2'
     template_name = "accounts/signup.html"
 
 #    def get_context_data(self, **kwargs):
