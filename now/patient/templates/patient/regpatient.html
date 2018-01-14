@@ -1,19 +1,21 @@
 {% extends "base.html" %}
-
+{% load bootstrap4 %}
 
 {% block content %}
-<div class='col-12 col-md-6 mx-auto'>
+<div class="row">
+<div class="col-md-8">
+   <div class="jumbotron" style="background-color: #A9E2F3; margin-left: 20%; margin-top: 8%; margin-bottom: 30%;  width: 100%">
 {% if title %}<h1 class='my-3'>{{ title }}</h1>{% endif %}
 <form method='POST' action='{% if action_url %}{{ action_url }}{% endif %}'> {% csrf_token %}
     {% if next_url %}
     <input type='hidden' name='next' value='{{ next_url }}' />
     {% endif %}
-  {{ form.as_p }}
-  <label for='email'>Email</label>
-  <input type='text' id='email' class='form-control disabled' value='{{ request.user.email }}' disabled="disabled" /><span class='help-text'>Cannot change email</span><br/>
-
+   {% bootstrap_form form %}
   <button type='submit' class='btn btn-default my-3'>Save</button>
-  <a href='#'>Change Password</a>
+</div>
+</div>
 </form>
+</div>
+</div>
 </div>
 {% endblock %}

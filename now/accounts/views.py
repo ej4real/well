@@ -17,23 +17,23 @@ from django.shortcuts import render,redirect
 
 class LoginView(NextUrlMixin, RequestFormAttachMixin, FormView):
     form_class = forms.LoginForm
-    success_url = '/'
+    success_url = '/profileacc/update'
     template_name = 'accounts/login.html'
-    default_next = '/'
+    default_next = '/profileacc/update'
 
     def form_valid(self, form):
         next_path = self.get_next_url()
         return redirect(next_path)
 
-class AccountHomeView(LoginRequiredMixin, DetailView):
-    template_name = 'accounts/home.html'
-    def get_object(self):
-        return self.request.user
+#class AccountHomeView(LoginRequiredMixin, DetailView):
+#    template_name = 'accounts/home.html'
+#    def get_object(self):
+#        return self.request.user
 
 
 class RegisterView(CreateView):
     form_class  = forms.RegisterForm
-    success_url = '/profileacc/register2'
+    success_url = '/login'
     template_name = "accounts/signup.html"
 
 #    def get_context_data(self, **kwargs):

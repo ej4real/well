@@ -17,25 +17,25 @@ class UserManager(BaseUserManager):
             full_name = full_name,
         )
         user_obj.set_password(password)
-        user_obj.staff = is_staff
         user_obj.admin = is_admin
+        user_obj.staff = is_staff
         user_obj.active = is_active
         user_obj.save(using=self.db)
         return user_obj
 
-    def create_staffuser(self, email, full_name, password=None):
+    def create_staffuser(self, email,full_name=None, password=None):
         user = self.create_user(
                 email,
-                full_name,
+                full_name=full_name,
                 password=password,
                 is_staff=True
         )
         return user
 
-    def create_superuser(self, email, full_name, password=None):
+    def create_superuser(self, email, full_name=None, password=None):
         user = self.create_user(
                 email,
-                full_name,
+                full_name=full_name,
                 password=password,
                 is_staff=True,
                 is_admin=True
@@ -73,13 +73,14 @@ class User(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
 
-    @property
-    def is_staff(self):
-        return self.staff
 
     @property
     def is_admin(self):
         return self.admin
+
+    @property
+    def is_staff(self):
+        return self.staff
 
     @property
     def is_active(self):

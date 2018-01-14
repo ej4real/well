@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate, login, get_user_model
 from . import models
 from profileacc.models import DocProfile
 
+User = get_user_model()
+
 
 class DocProfileAdminCreationForm(forms.ModelForm):
 
@@ -28,15 +30,29 @@ class DocProfileAdminChangeForm(forms.ModelForm):
         model = DocProfile
         fields = ('address1', 'birth_date')
 
-class ProfileRegForm(forms.ModelForm):
-
+class ProfileDetailChangeForm(forms.ModelForm):
     class Meta:
         model = DocProfile
         fields = ('address1', 'birth_date')
 
-    def save(self, commit=True):
+        def save(self, commit=True):
+            # Save the provided password in hashed format
+            user = super(ProfileDetailChangeForm, self).save(commit=False)
+            if commit:
+                user.save()
+            return user
+
+#    def save(self, commit=True):
         # Save the provided password in hashed format
-        user_obj = super(ProfileRegForm, self).save(commit=False)
-        if commit:
-            user_obj.save()
-        return user_obj
+#        user = super(ProfileRegForm, self).save(commit=False)
+#        if commit:
+#            user.save()
+#        return user
+
+
+#def pre_save_email_activation(sender, instance, *args, **kwargs):
+#    if not instance.activated and not instance.forced_expired:
+#        if not instance.key:
+#            instance.key = unique_key_generator(instance)
+
+#pre_save.connect(pre_save_email_activation, sender=EmailActivation)

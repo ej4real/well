@@ -28,26 +28,28 @@
 
           <div class="col-md-6">
             <ul class="list-unstyled" style="margin-top: 10%">
-              <li> {{ user.full_name }} </li>
-              <li> Doctor of Internal Medicine </li>
-              <li> {{ user.docprofile.address1 }} </li>
-              <li> Age: 54 </li>
+              <li> Name: {{ user.patientprofile.pat_name }} </li>
+              <li> Address: {{ user.patientprofile.address1 }} </li>
+              <li> Age: {{ user.patientprofile.pat_age }} </li>
+              <li> Birth Date: {{ user.patientprofile.pat_birthdate }} </li>
+              <li> Gender: {{ user.patientprofile.gender_check }} </li>
+              <li> Contact Number: {{ user.patientprofile.cont_num }} </li>
             </ul>
           </div>
         </div>
 
         <div class="row">
           <div class="col-md-12" style="margin-top: 2%; margin-left: 8%">
-            <button class="btn btn-default"><a href="{% url 'profileacc:update'%}"> Edit Profile </button>
+            <button class="btn btn-default"><a href="{% url 'patient:pupdate'%}"> Edit Patient </button>
           </div>
         </div>
 
         <div class="row pt-4" style="margin-top: 5%">
           <div class="col-md-6">
-            <button type="button" class="btn btn-outline-info" style="width: 100%"> <a href="{% url 'patient:pregister' %}"> Add Patient </a> </button>
+            <button type="button" class="btn btn-outline-info" style="width: 100%"> <a href="#"> Contact Patient </a> </button>
           </div>
           <div class="col-md-6">
-            <button type="button" class="btn btn-outline-info" style="width: 100%"> <a href="{% url 'patient:pdash' %}"> Patient Dashboard </a> </button>
+            <button type="button" class="btn btn-outline-info" style="width: 100%"> <a href="#"> See Records </a> </button>
 
            <!-- The Modal -->
             <div class="modal fade" id="myModal">

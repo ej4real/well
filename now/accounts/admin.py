@@ -4,7 +4,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 User = get_user_model()
 
-from .forms import UserAdminCreationForm, UserAdminChangeForm
+from accounts.forms import UserAdminCreationForm, UserAdminChangeForm
 
 class UserAdmin(BaseUserAdmin):
     # The forms to add and change user instances

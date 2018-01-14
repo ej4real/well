@@ -6,7 +6,6 @@ from profileacc.models import DocProfile
 
 User = get_user_model()
 
-
 class UserAdminCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
@@ -85,6 +84,13 @@ class RegisterForm(forms.ModelForm):
             user.save()
         return user
 
+#def post_save_user_create_reciever(sender, instance, created, *args, **kwargs):
+#    if created:
+#        obj = EmailActivation.objects.create(user=instance, email=instance.email)
+#        obj.send_activation()
+
+#post_save.connect(post_save_user_create_reciever, sender=User)
+
 
 class LoginForm(forms.Form):
     email    = forms.EmailField(label='Email')
@@ -105,3 +111,11 @@ class LoginForm(forms.Form):
         login(request, user)
         self.user = user
         return data
+
+class UserDetailChangeForm(forms.ModelForm):
+    full_name = forms.CharField(label='Name', required=False, widget=forms.TextInput(attrs={"class": 'form-control'}))
+    #address1 = forms.CharField(label='Address', required=False, widget=forms.TextInput(attrs={"class": 'form-control'}))
+
+    class Meta:
+        model = User
+        fields = ['full_name']
