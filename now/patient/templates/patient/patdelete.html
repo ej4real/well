@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class='col-12 col-md-6 mx-auto'>
+{% if title %}<h1 class='my-3'>{{ title }}</h1>{% endif %}
+<form method='POST' action='{% if action_url %}{{ action_url }}{% endif %}'> {% csrf_token %}
+    {% if next_url %}
+    <input type='hidden' name='next' value='{{ next_url }}' />
+    {% endif %}
+  <h1>Below is the Patient that you want to delete:</h1><br>
+  <label for='email'>Full Name:</label>
+  <input type='text' id='email' class='form-control disabled' value='{{ request.user.patientprofile.pat_name }}' disabled="disabled" /><span class='help-text'>Cannot change email</span><br/>
+
+  <button type='submit' class='btn btn-default my-3'>Delete</button>
+</form>
+</div>
+{% endblock %}
