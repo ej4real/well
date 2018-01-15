@@ -1,9 +1,9 @@
 from django.db import models
 from datetime import datetime, date, time
 from django.utils import timezone
-from accounts.models import User
 from django.contrib.auth import authenticate, login, get_user_model
-from phonenumber_field.modelfields import PhoneNumberField
+from django.dispatch import receiver
+from django.db.models.signals import post_save, pre_save
 # Create your models here.
 User = get_user_model()
 

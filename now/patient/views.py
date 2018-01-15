@@ -1,6 +1,6 @@
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView, FormView, DetailView, UpdateView
+from django.views.generic import CreateView, FormView, DetailView, UpdateView, DeleteView
 from patient.forms import PatProfileDetailChangeForm, RegPatientForm
 from django.db.models.signals import pre_save, post_save
 from django import forms
@@ -35,3 +35,11 @@ class PatDashboardView(LoginRequiredMixin, DetailView):
 
     def get_patientprofile(self):
         return self.request.user.patientprofile
+
+class PatDeleteView(LoginRequiredMixin, DeleteView):
+    template_name = 'patient/patdelete.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(PatRegView, self).get_context_data(*args, **kwargs)
+        context['title'] = 'Delete Patient Profile'
+        return context

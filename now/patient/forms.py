@@ -42,7 +42,7 @@ class PatProfileDetailChangeForm(forms.ModelForm):
             return user
 
 class RegPatientForm(forms.ModelForm):
-    
+
     class Meta:
         model = PatientProfile
         fields = ('name', 'email' , 'age', 'address', 'birth_date', 'gender', 'contact_number',)
@@ -61,6 +61,8 @@ class RegPatientForm(forms.ModelForm):
         if qs.exists():
             raise forms.ValidationError("Cannot use this email. It's already registered")
         return email
+
+
 
 #    def save(self, commit=True):
 #        # Save the provided password in hashed format
