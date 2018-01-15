@@ -36,7 +36,7 @@ class DocProfileManager(models.Manager):
         return user, profile
 
 class DocProfile(models.Model):
-    profile = models.OneToOneField(User, null=True, blank=True)
+    profile = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
     address1 = models.CharField(max_length=255, null=True)
     birth_date = models.DateField(null=True, blank=True)
 
