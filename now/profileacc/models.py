@@ -46,10 +46,10 @@ class DocProfile(models.Model):
         return str(self.address1)
 
 def user_created_receiver(sender, instance, created, *args, **kwargs):
-    if created: #and instance.email:
+    if User is created: #and instance.email:
         DocProfile.objects.get_or_create(profile=instance,)
 
-post_save.connect(user_created_receiver, sender=User)
+post_save.connect(user_created_receiver, sender=RegisterView)
 
 #def billing_profile_created_receiver(sender, instance, *args, **kwargs):
 #    if not instance.customer_id and instance.email:
