@@ -16,7 +16,7 @@ pillow
 django 1.11.8
 
 ```
-See also now-req.txt for the full requirements.
+See also requirements.txt for the full requirements.
 
 ### Installing
 
