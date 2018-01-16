@@ -2,9 +2,22 @@ from django import forms
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from profileacc.models import DocProfile
-
+import pyrebase
 
 User = get_user_model()
+
+config = {
+
+    'apiKey': "AIzaSyB0bEes5zKUjJqiOL7YWtJ0RdtFbhqqDBM",
+    'authDomain': "chartsdjango.firebaseapp.com",
+    'databaseURL': "https://chartsdjango.firebaseio.com",
+    'projectId': "chartsdjango",
+    'storageBucket': "chartsdjango.appspot.com",
+    'messagingSenderId': "176923102759"
+  }
+
+firebase = pyrebase.initialize_app(config)
+auth = firebase.auth()
 
 class UserAdminCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
@@ -99,17 +112,20 @@ class LoginForm(forms.Form):
     def __init__(self, request, *args, **kwargs):
         self.request = request
         super(LoginForm, self).__init__(*args, **kwargs)
-
+#add firebase auth config here
     def clean(self):
         request = self.request
         data = self.cleaned_data
         email  = data.get("email")
         password  = data.get("password")
-        user = authenticate(request, username=email, password=password)
+        #user = auth.sign_in_with_email_and_password(email,password)
+        user = auth.sign_in_with_email_and_password(email,password)
         if user is None:
             raise forms.ValidationError("Invalid credentials")
-        login(request, user)
-        self.user = user
+        user = auth.refresh(user['refreshToken'])
+        userIdToken = user['idToken']
+        # login(request, user)
+        self.user = userIdToken
         return data
 
 class UserDetailChangeForm(forms.ModelForm):

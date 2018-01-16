@@ -31,6 +31,7 @@ class LoginView(NextUrlMixin, RequestFormAttachMixin, FormView):
 #        return self.request.user
 
 
+
 class RegisterView(CreateView):
     form_class  = forms.RegisterForm
     success_url = '/login'
